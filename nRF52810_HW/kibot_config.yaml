@@ -1,0 +1,129 @@
+kibot:
+  version: 1
+
+preflight:
+  erc:
+    enabled: true
+    dir: fabrication_output/rule_checks
+    format: ["HTML", "RPT"]
+    output: "%f-%i%I%v.%x"
+    dont_stop: false
+  check_zone_fills: true
+
+outputs:
+  - name: 'gerbers'
+    type: gerber
+    dir: fabrication_output/manufacturing/gerbers_and_drills
+    options:
+      # generic layer options
+      exclude_edge_layer: true
+      exclude_pads_from_silkscreen: false
+      plot_sheet_reference: false
+      plot_footprint_refs: true
+      plot_footprint_values: true
+      force_plot_invisible_refs_vals: false
+      tent_vias: true
+
+      # gerber options
+      line_width: 0.1
+      subtract_mask_from_silk: false
+      use_protel_extensions: false
+      gerber_precision: 4.5
+      create_gerber_job_file: true
+      use_gerber_x2_attributes: true
+      use_gerber_net_attributes: true
+
+    layers:
+      - F.Cu
+      - B.Cu
+      - F.SilkS
+      - B.SilkS
+      - F.Mask
+      - B.Mask
+      - User.Drawings
+      - User.Comments
+      - Edge.Cuts
+      - F.Courtyard
+      - B.Courtyard
+      - F.Fab
+      - B.Fab
+
+  - name: 'drill_files'
+    type: excellon
+    dir: fabrication_output/manufacturing/gerbers_and_drills
+    options:
+      metric_units: true
+      pth_and_npth_single_file: false
+
+  - name: 'bom'
+    comment: "Bill of Materials in CSV format"
+    type: bom
+    dir: fabrication_output/manufacturing
+
+  - name: 'position'
+    comment: "Pick and place file, JLC style"
+    type: position
+    dir: fabrication_output/manufacturing
+    options:
+      format: CSV
+
+  - name: 'print_sch'
+    comment: "Print schematic (PDF)"
+    type: pdf_sch_print
+    dir: fabrication_output
+    options:
+      output: schematic.pdf
+
+  - name: "base"
+    dir: fabrication_output/capture
+    type: render_3d
+    run_by_default: false
+    options:
+      ray_tracing: false
+      width: 2000
+      height: 1000
+
+  - name: "top"
+    comment: "Top view"
+    dir: fabrication_output/capture
+    type: render_3d
+    extends: "base"
+    options:
+      rotate_x: 3
+      rotate_z: -2
+      output: "pcb_3d_render_top.png"
+
+  - name: "bottom"
+    comment: "Bottom view"
+    dir: fabrication_output/capture
+    type: render_3d
+    extends: "top"
+    options:
+      width: 1920
+      view: "bottom"
+      output: "pcb_3d_render_bottom.png"
+
+  - name: 'board_image_top'
+    comment: "Image of PCB"
+    type: pcbdraw
+    dir: fabrication_output/capture
+    options:
+      bottom: false
+      format: "png"
+      output: "pcb_2d_image_top.png"
+
+  - name: 'board_image_bottom'
+    comment: "Image of PCB"
+    type: pcbdraw
+    dir: fabrication_output/capture
+    options:
+      bottom: true
+      format: "png"
+      output: "pcb_2d_image_bottom.png"
+
+  - name: "interactive_bom"
+    comment: "Interactive Bill of Materials (HTML)"
+    type: ibom
+    dir: fabrication_output/interactive_bom
+    options:
+      blacklist_empty_val: true
