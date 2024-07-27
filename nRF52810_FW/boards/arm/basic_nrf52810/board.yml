@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 board:
-  name: custom_plank
+  name: basic_nrf52810
   vendor: arm
   socs:
-    - name: nrf52840
+    - name: nrf52810

@@ -6,8 +6,8 @@ name: Custom-Plank
 vendor: vendor
 type: mcu
 arch: arm
-ram: 256
-flash: 1024
+ram: 24
+flash: 192
 toolchain:
   - zephyr
   - gnuarmemb
