@@ -1,0 +1,7 @@
+nRF52810_FW/build
+nRF52810_FW/tools
+nRF52810_FW/modules
+nRF52810_FW/zephyr
+nRF52810_FW/bootloader
+nRF52810_HW/fp-info-cache
+nRF52810_HW/fabrication_output

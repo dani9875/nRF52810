@@ -1,0 +1,49 @@
+name: Release workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+  push:
+    tags:
+     - '*'
+
+jobs:
+  generate-artifacts:
+    name: kicad export
+    runs-on: ubuntu-latest
+    container: "setsoft/kicad_auto:ki8"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Storing release version tag in github environment
+      shell: bash
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+    - name: Install zip utility
+      run: |
+        apt-get update && apt-get install -y zip
+
+    - name: Generate Gerber files
+      run: |
+        cd nRF52810_HW
+        kibot -c kibot_config.yaml
+        zip -r fabrication_output.zip fabrication_output
+        ls
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: fabrication_output
+        path: nRF52810_HW/fabrication_output.zip
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ env.RELEASE_VERSION }}
+        name: ${{ env.RELEASE_VERSION }} release
+        files: nRF52810_HW/fabrication_output.zip
+        draft: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}

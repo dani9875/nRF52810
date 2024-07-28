@@ -1,0 +1,8 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+board:
+  name: basic_nrf52810
+  vendor: arm
+  socs:
+    - name: nrf52810
