@@ -1489,6 +1489,182 @@
 				)
 			)
 		)
+		(symbol "pepy_sym_lib:[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.002)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0 5.842 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "C0805C120J5GACAUTO"
+				(at -0.254 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Footprint" "pepy_sym_lib:[CAP_SMD_0805_2012Metric]"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401181546_KEMET-C0805C120J5GACAUTO_C3844403.pdf"
+				(at 0 -8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "50V 12pF C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS "
+				(at 0 -13.716 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C1713"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer" "KEMET"
+				(at -0.254 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Nvalue" "12pF"
+				(at -0.254 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Package" "0805"
+				(at 0 -18.542 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO_0_1"
+				(polyline
+					(pts
+						(xy -1.27 0) (xy -0.51 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.51 2.03) (xy -0.51 -2.03)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.51 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.51 2.03) (xy 0.51 -2.03)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "pepy_sym_lib:[CAP_SMD_0805_2012Metric]Samsung Electro-Mechanics CL21A106KOQNNNE"
 			(pin_numbers hide)
 			(pin_names
@@ -3449,6 +3625,12 @@
 		(uuid "18fde3ce-0c2b-4abd-b5fb-c9137f7e7fde")
 	)
 	(junction
+		(at 114.3 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2432f329-be82-42c1-8e0d-3c9c43fa5c45")
+	)
+	(junction
 		(at 215.9 76.2)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3479,16 +3661,10 @@
 		(uuid "4e7c370c-dd89-42ad-b62e-4f3d5f7045ff")
 	)
 	(junction
-		(at 114.3 58.42)
+		(at 114.3 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50383d4f-680b-43cf-b215-07b251530f93")
-	)
-	(junction
-		(at 99.06 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "623e7863-5de4-4eeb-b1a2-efe7c38e15c9")
+		(uuid "64d47657-ea57-4877-a81d-4e9b970ac508")
 	)
 	(junction
 		(at 215.9 58.42)
@@ -3501,12 +3677,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7045b75d-b35f-4237-beb1-b324b7dab727")
-	)
-	(junction
-		(at 114.3 68.58)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7b73e3a6-aa4d-4a1b-bc88-2b1a430661d9")
 	)
 	(junction
 		(at 236.22 88.9)
@@ -3666,16 +3836,6 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 68.58) (xy 99.06 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a48bd12-9171-42aa-998d-b486eeabab9d")
-	)
-	(wire
-		(pts
 			(xy 142.24 63.5) (xy 142.24 69.85)
 		)
 		(stroke
@@ -3706,13 +3866,13 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 58.42) (xy 99.06 58.42)
+			(xy 231.14 78.74) (xy 231.14 81.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2f485755-a673-4e48-98fe-0c5a0edec17c")
+		(uuid "289c5563-e0d7-4f12-a93d-93c03b97ce7d")
 	)
 	(wire
 		(pts
@@ -3753,6 +3913,16 @@
 			(type default)
 		)
 		(uuid "3a2508b9-165c-4d8b-8413-d2a2d4fbf24c")
+	)
+	(wire
+		(pts
+			(xy 251.46 64.77) (xy 252.73 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3af69c56-b282-4af0-b545-c5c7e3a75a71")
 	)
 	(wire
 		(pts
@@ -3806,33 +3976,13 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 58.42) (xy 101.6 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "524a37f5-b92d-4f20-9c8b-0f741cb8c124")
-	)
-	(wire
-		(pts
-			(xy 246.38 66.04) (xy 248.92 66.04)
+			(xy 246.38 66.04) (xy 251.46 66.04)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "53f62001-4831-4659-adf4-fe09a8916d32")
-	)
-	(wire
-		(pts
-			(xy 106.68 68.58) (xy 114.3 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "54bdad0f-ce20-4398-9ff5-78eae60bba46")
 	)
 	(wire
 		(pts
@@ -3896,6 +4046,16 @@
 	)
 	(wire
 		(pts
+			(xy 114.3 55.88) (xy 144.78 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65802118-788b-4169-84ff-7b12fd65010c")
+	)
+	(wire
+		(pts
 			(xy 195.58 66.04) (xy 201.93 66.04)
 		)
 		(stroke
@@ -3923,6 +4083,16 @@
 			(type default)
 		)
 		(uuid "697b00a6-db2e-4adb-9243-93e82da99742")
+	)
+	(wire
+		(pts
+			(xy 251.46 72.39) (xy 252.73 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ce25f03-e30e-4cf3-aa5b-8aacd5edc177")
 	)
 	(wire
 		(pts
@@ -3956,16 +4126,6 @@
 	)
 	(wire
 		(pts
-			(xy 99.06 58.42) (xy 99.06 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7aa37190-1103-424d-8732-50f2d887b433")
-	)
-	(wire
-		(pts
 			(xy 114.3 55.88) (xy 114.3 58.42)
 		)
 		(stroke
@@ -3973,6 +4133,16 @@
 			(type default)
 		)
 		(uuid "804fdb2f-558a-4b22-a04c-631e442f8c78")
+	)
+	(wire
+		(pts
+			(xy 114.3 69.85) (xy 114.3 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "860aa443-b887-4b81-8771-4bdcea81e562")
 	)
 	(wire
 		(pts
@@ -4013,16 +4183,6 @@
 			(type default)
 		)
 		(uuid "8b331952-9129-4564-bad3-6cc89c1ea6da")
-	)
-	(wire
-		(pts
-			(xy 231.14 76.2) (xy 231.14 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "95be8c5b-ca01-45ce-93e8-2b5ae7fbc65e")
 	)
 	(wire
 		(pts
@@ -4096,26 +4256,6 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 58.42) (xy 114.3 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b55fb1aa-0d45-46e0-974a-f8887105f3c2")
-	)
-	(wire
-		(pts
-			(xy 144.78 55.88) (xy 114.3 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b5a498f0-c11a-4dc2-b6cd-80bd9757c6a8")
-	)
-	(wire
-		(pts
 			(xy 213.36 83.82) (xy 213.36 88.9)
 		)
 		(stroke
@@ -4133,6 +4273,16 @@
 			(type default)
 		)
 		(uuid "c1c078bf-ac19-439e-994c-5a81cb6058c9")
+	)
+	(wire
+		(pts
+			(xy 251.46 66.04) (xy 251.46 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d49c9fe5-a92d-43cb-9a29-08bfad900f80")
 	)
 	(wire
 		(pts
@@ -4156,6 +4306,16 @@
 	)
 	(wire
 		(pts
+			(xy 251.46 71.12) (xy 251.46 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9b74589-adec-477c-bae3-b1d1f2d6908d")
+	)
+	(wire
+		(pts
 			(xy 114.3 68.58) (xy 114.3 69.85)
 		)
 		(stroke
@@ -4176,7 +4336,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 71.12) (xy 248.92 71.12)
+			(xy 246.38 71.12) (xy 251.46 71.12)
 		)
 		(stroke
 			(width 0)
@@ -4227,8 +4387,8 @@
 		(uuid 0a83563e-7107-4f04-9b1e-37f23a39e846)
 	)
 	(rectangle
-		(start 81.28 45.72)
-		(end 256.54 109.22)
+		(start 81.28 35.56)
+		(end 265.43 109.22)
 		(stroke
 			(width 0)
 			(type default)
@@ -4840,76 +5000,6 @@
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
 					(reference "R?")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 248.92 68.58 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "16648d92-4460-4850-a8bf-08bf3c69cd17")
-		(property "Reference" "C13"
-			(at 251.46 67.3163 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "12pF"
-			(at 251.46 69.8563 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 248.92 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 248.92 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 248.92 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "532e3aad-7ed5-45b3-8011-fb1ad5ed21d2")
-		)
-		(pin "2"
-			(uuid "2257e13f-daf4-4f6e-914a-338fc8de737b")
-		)
-		(instances
-			(project "nRF52810"
-				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
-					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -5946,73 +6036,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Small")
-		(at 104.14 58.42 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "51faa6df-dc27-4aac-8fd4-b0f914b2016d")
-		(property "Reference" "C3"
-			(at 104.14 55.88 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "12pF"
-			(at 104.14 60.96 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 104.14 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 104.14 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 104.14 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2f8c47a8-eccf-49e3-9f58-6ee13a05a27f")
-		)
-		(pin "2"
-			(uuid "052cede8-62b5-47ff-a4c0-16a130e2f82a")
-		)
-		(instances
-			(project "nRF52810"
-				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
-					(reference "C3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 223.52 66.04 0)
 		(unit 1)
@@ -6453,6 +6476,112 @@
 		)
 	)
 	(symbol
+		(lib_id "pepy_sym_lib:[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO")
+		(at 114.3 76.2 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "63f497d9-a027-4ca7-8854-b236b4a8a46f")
+		(property "Reference" "C?"
+			(at 118.11 74.9299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "C0805C120J5GACAUTO"
+			(at 118.11 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[CAP_SMD_0805_2012Metric]"
+			(at 120.65 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401181546_KEMET-C0805C120J5GACAUTO_C3844403.pdf"
+			(at 123.19 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "50V 12pF C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS "
+			(at 128.016 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C1713"
+			(at 125.73 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "KEMET"
+			(at 125.73 76.454 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Nvalue" "12pF"
+			(at 118.11 77.4699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Package" "0805"
+			(at 132.842 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "22c068de-e339-498b-956f-6ae1e6255225")
+		)
+		(pin "2"
+			(uuid "4b286d57-c21a-4987-8fbc-86bfed65151b")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "C?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:Fiducial")
 		(at 253.9492 156.464 0)
 		(unit 1)
@@ -6749,76 +6878,6 @@
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
 					(reference "#PWR02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 231.14 73.66 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7d1943b6-2563-4523-8c52-d5829bca4083")
-		(property "Reference" "C12"
-			(at 233.68 72.3963 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "12pF"
-			(at 233.68 74.9363 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 231.14 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 231.14 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 231.14 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "22d2cf6a-1988-4878-ba45-c21f930ad390")
-		)
-		(pin "2"
-			(uuid "ad5dba10-c8cd-46e5-87f5-8c1ca655b94e")
-		)
-		(instances
-			(project "nRF52810"
-				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
-					(reference "C12")
 					(unit 1)
 				)
 			)
@@ -7164,6 +7223,111 @@
 		)
 	)
 	(symbol
+		(lib_id "pepy_sym_lib:[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO")
+		(at 252.73 68.58 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8bb5164a-5cd4-4c3d-9960-abc3deb6f626")
+		(property "Reference" "C?"
+			(at 254 66.802 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "C0805C120J5GACAUTO"
+			(at 256.54 68.834 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[CAP_SMD_0805_2012Metric]"
+			(at 259.08 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401181546_KEMET-C0805C120J5GACAUTO_C3844403.pdf"
+			(at 261.62 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "50V 12pF C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS "
+			(at 266.446 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C1713"
+			(at 264.16 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "KEMET"
+			(at 264.16 68.834 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Nvalue" "12pF"
+			(at 253.492 70.612 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Package" "0805"
+			(at 271.272 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "55d16fb0-b3e8-4d5e-aac3-c5049fc0023d")
+		)
+		(pin "1"
+			(uuid "ac32aeb4-b468-4b13-9dd7-65a65f67f270")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "C?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "pepy_sym_lib:[CAP_SMD_0805_2012Metric]KEMET C0805C105M4VACTU")
 		(at 205.74 67.31 90)
 		(unit 1)
@@ -7402,32 +7566,26 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Small")
-		(at 104.14 68.58 270)
+		(lib_id "pepy_sym_lib:[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO")
+		(at 231.14 74.93 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a24cff9f-95fd-4848-9777-da2316d4fcb1")
-		(property "Reference" "C4"
-			(at 104.14 73.66 90)
+		(fields_autoplaced yes)
+		(uuid "9906e016-9817-457e-ba25-217b8618803c")
+		(property "Reference" "C?"
+			(at 234.95 73.6599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Value" "12pF"
-			(at 104.14 71.12 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 104.14 68.58 0)
+		(property "Value" "C0805C120J5GACAUTO"
+			(at 234.95 75.184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7435,8 +7593,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 104.14 68.58 0)
+		(property "Footprint" "pepy_sym_lib:[CAP_SMD_0805_2012Metric]"
+			(at 237.49 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7444,8 +7602,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 104.14 68.58 0)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401181546_KEMET-C0805C120J5GACAUTO_C3844403.pdf"
+			(at 240.03 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7453,16 +7611,61 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "15105df3-75a9-4573-adce-06bded50ad10")
+		(property "Description" "50V 12pF C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS "
+			(at 244.856 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C1713"
+			(at 242.57 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "KEMET"
+			(at 242.57 75.184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Nvalue" "12pF"
+			(at 234.95 76.1999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Package" "0805"
+			(at 249.682 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "2"
-			(uuid "4cfa3ebe-4698-4162-ba00-55a1ed8e595e")
+			(uuid "f67b21d9-d94a-472c-86f8-778e0c57de01")
+		)
+		(pin "1"
+			(uuid "200245d6-ac0e-44ee-a3cc-06fba440b9b4")
 		)
 		(instances
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
-					(reference "C4")
+					(reference "C?")
 					(unit 1)
 				)
 			)
@@ -7797,7 +8000,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 91.44 58.42 0)
+		(at 114.3 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7806,7 +8009,7 @@
 		(fields_autoplaced yes)
 		(uuid "af247b8c-6bd2-4027-b58c-ff91a8fc9273")
 		(property "Reference" "#PWR015"
-			(at 91.44 64.77 0)
+			(at 114.3 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7815,7 +8018,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 91.44 63.5 0)
+			(at 114.3 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7823,7 +8026,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 91.44 58.42 0)
+			(at 114.3 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7832,7 +8035,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 91.44 58.42 0)
+			(at 114.3 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7841,7 +8044,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 91.44 58.42 0)
+			(at 114.3 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8215,6 +8418,112 @@
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
 					(reference "#PWR024")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "pepy_sym_lib:[CAP_SMD_0805_2012Metric]KEMET C0805C120J5GACAUTO")
+		(at 114.3 52.07 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c8aa2fd5-1f84-4324-9dfd-850cbcc2d9a4")
+		(property "Reference" "C?"
+			(at 118.11 50.7999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "C0805C120J5GACAUTO"
+			(at 118.11 52.324 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[CAP_SMD_0805_2012Metric]"
+			(at 120.65 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2401181546_KEMET-C0805C120J5GACAUTO_C3844403.pdf"
+			(at 123.19 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "50V 12pF C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS "
+			(at 128.016 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C1713"
+			(at 125.73 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer" "KEMET"
+			(at 125.73 52.324 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Nvalue" "12pF"
+			(at 118.11 53.3399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Package" "0805"
+			(at 132.842 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "18235b2f-cad3-4196-b8a3-2db0b52cefb1")
+		)
+		(pin "2"
+			(uuid "3104d453-26c5-4677-91e9-e0b9646c1105")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "C?")
 					(unit 1)
 				)
 			)
@@ -8688,6 +8997,72 @@
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
 					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 114.3 48.26 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d709b338-9e8e-446d-833b-4b4231d925be")
+		(property "Reference" "#PWR031"
+			(at 114.3 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 114.3 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 114.3 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 114.3 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7fd49f9b-7d4a-4ac9-b745-e39d66c2f24c")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
