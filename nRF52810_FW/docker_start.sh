@@ -11,4 +11,4 @@ else
     exit 1
 fi
 
-$CONTAINER_TOOL run --rm --privileged -it -v /dev:/dev -v $PWD:/project -w /project/ nrfconnect-sdk sh -c "bash"
+$CONTAINER_TOOL run --rm --privileged -it -v /dev:/dev -v $PWD:/project -w /project/ nrf_sdk sh -c "bash"

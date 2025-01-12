@@ -1,19 +1,47 @@
 # nRF52810
 Basic HW and FW to setup nRF developer environment
 
-A few steps for building the project: 
-- west init root project
-- west update
-- west zephyr-export
-- west build -b nrf52840dk/nrf52840 app
+# Instructions
 
-# How to
-Coming soon...
+1. Clone the repository:
+```bash
+git clone <repository-url>
+```
+
+2. Build the Docker image (requires sudo permissions):
+```bash
+sudo ./docker_build.sh
+```
+3. Start the Docker container:
+
+```bash
+./docker_start.sh
+```
+
+4. Enter the project root folder (you should already be in the correct directory).
+
+5. Initialize the West workspace:
+```bash
+west init -l app
+```
+
+6. Update west modules (this step can take a few minutes)
+```bash
+west update
+```
+
+7. Export Zephyr environment:
+```bash
+west zephyr-export
+```
+
+8. Build the application for the nRF52840 DK:
+```bash
+west build -b nrf52840dk/nrf52840 app
+```
 
 
 ## Release notes
-
-### Version: v1.1
 
 ### Version: v1.0
 Changelog:
