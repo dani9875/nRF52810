@@ -33,6 +33,8 @@
 
 #define BASE_USB_HID_SPEC_VERSION   0x0101
 #define CONFIG_BT_DIRECTED_ADVERTISING 1
+#define CONFIG_BT_HIDS_SECURITY_ENABLED 1
+
 
 
 /* Number of pixels by which the cursor is moved when a button is pushed. */
@@ -133,29 +135,29 @@ K_MSGQ_DEFINE(mitm_queue,
 	      CONFIG_BT_HIDS_MAX_CLIENT_COUNT,
 	      4);
 
-// #if CONFIG_BT_DIRECTED_ADVERTISING
-// static void bond_find(const struct bt_bond_info *info, void *user_data)
-// {
-// 	int err;
+#if CONFIG_BT_DIRECTED_ADVERTISING
+static void bond_find(const struct bt_bond_info *info, void *user_data)
+{
+	int err;
 
-// 	/* Filter already connected peers. */
-// 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// 		if (conn_mode[i].conn) {
-// 			const bt_addr_le_t *dst =
-// 				bt_conn_get_dst(conn_mode[i].conn);
+	/* Filter already connected peers. */
+	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+		if (conn_mode[i].conn) {
+			const bt_addr_le_t *dst =
+				bt_conn_get_dst(conn_mode[i].conn);
 
-// 			if (!bt_addr_le_cmp(&info->addr, dst)) {
-// 				return;
-// 			}
-// 		}
-// 	}
+			if (!bt_addr_le_cmp(&info->addr, dst)) {
+				return;
+			}
+		}
+	}
 
-// 	err = k_msgq_put(&bonds_queue, (void *) &info->addr, K_NO_WAIT);
-// 	if (err) {
-// 		printk("No space in the queue for the bond.\n");
-// 	}
-// }
-// #endif
+	err = k_msgq_put(&bonds_queue, (void *) &info->addr, K_NO_WAIT);
+	if (err) {
+		printk("No space in the queue for the bond.\n");
+	}
+}
+#endif
 
 static void advertising_continue(void)
 {
@@ -212,159 +214,159 @@ static void advertising_continue(void)
 	is_adv_running = true;
 }
 
-// static void advertising_start(void)
-// {
-// #if CONFIG_BT_DIRECTED_ADVERTISING
-// 	k_msgq_purge(&bonds_queue);
-// 	bt_foreach_bond(BT_ID_DEFAULT, bond_find, NULL);
-// #endif
+static void advertising_start(void)
+{
+#if CONFIG_BT_DIRECTED_ADVERTISING
+	k_msgq_purge(&bonds_queue);
+	bt_foreach_bond(BT_ID_DEFAULT, bond_find, NULL);
+#endif
 
-// 	k_work_submit(&adv_work);
-// }
+	k_work_submit(&adv_work);
+}
 
 static void advertising_process(struct k_work *work)
 {
 	advertising_continue();
 }
 
-// static void pairing_process(struct k_work *work)
-// {
-// 	int err;
-// 	struct pairing_data_mitm pairing_data;
+static void pairing_process(struct k_work *work)
+{
+	int err;
+	struct pairing_data_mitm pairing_data;
 
-// 	char addr[BT_ADDR_LE_STR_LEN];
+	char addr[BT_ADDR_LE_STR_LEN];
 
-// 	err = k_msgq_peek(&mitm_queue, &pairing_data);
-// 	if (err) {
-// 		return;
-// 	}
+	err = k_msgq_peek(&mitm_queue, &pairing_data);
+	if (err) {
+		return;
+	}
 
-// 	bt_addr_le_to_str(bt_conn_get_dst(pairing_data.conn),
-// 			  addr, sizeof(addr));
+	bt_addr_le_to_str(bt_conn_get_dst(pairing_data.conn),
+			  addr, sizeof(addr));
 
-// 	printk("Passkey for %s: %06u\n", addr, pairing_data.passkey);
+	printk("Passkey for %s: %06u\n", addr, pairing_data.passkey);
 
-// 	if (IS_ENABLED(CONFIG_SOC_SERIES_NRF54HX) || IS_ENABLED(CONFIG_SOC_SERIES_NRF54LX)) {
-// 		printk("Press Button 0 to confirm, Button 1 to reject.\n");
-// 	} else {
-// 		printk("Press Button 1 to confirm, Button 2 to reject.\n");
-// 	}
-// }
-
-
-// static void insert_conn_object(struct bt_conn *conn)
-// {
-// 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// 		if (!conn_mode[i].conn) {
-// 			conn_mode[i].conn = conn;
-// 			conn_mode[i].in_boot_mode = false;
-
-// 			return;
-// 		}
-// 	}
-
-// 	printk("Connection object could not be inserted %p\n", conn);
-// }
+	if (IS_ENABLED(CONFIG_SOC_SERIES_NRF54HX) || IS_ENABLED(CONFIG_SOC_SERIES_NRF54LX)) {
+		printk("Press Button 0 to confirm, Button 1 to reject.\n");
+	} else {
+		printk("Press Button 1 to confirm, Button 2 to reject.\n");
+	}
+}
 
 
-// static bool is_conn_slot_free(void)
-// {
-// 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// 		if (!conn_mode[i].conn) {
-// 			return true;
-// 		}
-// 	}
+static void insert_conn_object(struct bt_conn *conn)
+{
+	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+		if (!conn_mode[i].conn) {
+			conn_mode[i].conn = conn;
+			conn_mode[i].in_boot_mode = false;
 
-// 	return false;
-// }
+			return;
+		}
+	}
 
-
-// static void connected(struct bt_conn *conn, uint8_t err)
-// {
-// 	char addr[BT_ADDR_LE_STR_LEN];
-
-// 	is_adv_running = false;
-
-// 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
-// 	if (err) {
-// 		if (err == BT_HCI_ERR_ADV_TIMEOUT) {
-// 			printk("Direct advertising to %s timed out\n", addr);
-// 			k_work_submit(&adv_work);
-// 		} else {
-// 			printk("Failed to connect to %s 0x%02x %s\n", addr, err,
-// 			       bt_hci_err_to_str(err));
-// 		}
-// 		return;
-// 	}
-
-// 	printk("Connected %s\n", addr);
-
-// 	err = bt_hids_connected(&hids_obj, conn);
-
-// 	if (err) {
-// 		printk("Failed to notify HID service about connection\n");
-// 		return;
-// 	}
-
-// 	insert_conn_object(conn);
-
-// 	if (is_conn_slot_free()) {
-// 		advertising_start();
-// 	}
-// }
+	printk("Connection object could not be inserted %p\n", conn);
+}
 
 
-// static void disconnected(struct bt_conn *conn, uint8_t reason)
-// {
-// 	int err;
-// 	char addr[BT_ADDR_LE_STR_LEN];
+static bool is_conn_slot_free(void)
+{
+	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+		if (!conn_mode[i].conn) {
+			return true;
+		}
+	}
 
-// 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
-// 	printk("Disconnected from %s, reason 0x%02x %s\n", addr, reason, bt_hci_err_to_str(reason));
-
-// 	err = bt_hids_disconnected(&hids_obj, conn);
-
-// 	if (err) {
-// 		printk("Failed to notify HID service about disconnection\n");
-// 	}
-
-// 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// 		if (conn_mode[i].conn == conn) {
-// 			conn_mode[i].conn = NULL;
-// 			break;
-// 		}
-// 	}
-
-// 	advertising_start();
-// }
+	return false;
+}
 
 
-// #ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
-// static void security_changed(struct bt_conn *conn, bt_security_t level,
-// 			     enum bt_security_err err)
-// {
-// 	char addr[BT_ADDR_LE_STR_LEN];
+static void connected(struct bt_conn *conn, uint8_t err)
+{
+	char addr[BT_ADDR_LE_STR_LEN];
 
-// 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+	is_adv_running = false;
 
-// 	if (!err) {
-// 		printk("Security changed: %s level %u\n", addr, level);
-// 	} else {
-// 		printk("Security failed: %s level %u err %d %s\n", addr, level, err,
-// 		       bt_security_err_to_str(err));
-// 	}
-// }
-// #endif
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
 
-// BT_CONN_CB_DEFINE(conn_callbacks) = {
-// 	.connected = connected,
-// 	.disconnected = disconnected,
-// #ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
-// 	.security_changed = security_changed,
-// #endif
-// };
+	if (err) {
+		if (err == BT_HCI_ERR_ADV_TIMEOUT) {
+			printk("Direct advertising to %s timed out\n", addr);
+			k_work_submit(&adv_work);
+		} else {
+			printk("Failed to connect to %s 0x%02x %s\n", addr, err,
+			       bt_hci_err_to_str(err));
+		}
+		return;
+	}
+
+	printk("Connected %s\n", addr);
+
+	err = bt_hids_connected(&hids_obj, conn);
+
+	if (err) {
+		printk("Failed to notify HID service about connection\n");
+		return;
+	}
+
+	insert_conn_object(conn);
+
+	if (is_conn_slot_free()) {
+		advertising_start();
+	}
+}
+
+
+static void disconnected(struct bt_conn *conn, uint8_t reason)
+{
+	int err;
+	char addr[BT_ADDR_LE_STR_LEN];
+
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+
+	printk("Disconnected from %s, reason 0x%02x %s\n", addr, reason, bt_hci_err_to_str(reason));
+
+	err = bt_hids_disconnected(&hids_obj, conn);
+
+	if (err) {
+		printk("Failed to notify HID service about disconnection\n");
+	}
+
+	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+		if (conn_mode[i].conn == conn) {
+			conn_mode[i].conn = NULL;
+			break;
+		}
+	}
+
+	advertising_start();
+}
+
+
+#ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
+static void security_changed(struct bt_conn *conn, bt_security_t level,
+			     enum bt_security_err err)
+{
+	char addr[BT_ADDR_LE_STR_LEN];
+
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+
+	if (!err) {
+		printk("Security changed: %s level %u\n", addr, level);
+	} else {
+		printk("Security failed: %s level %u err %d %s\n", addr, level, err,
+		       bt_security_err_to_str(err));
+	}
+}
+#endif
+
+BT_CONN_CB_DEFINE(conn_callbacks) = {
+	.connected = connected,
+	.disconnected = disconnected,
+#ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
+	.security_changed = security_changed,
+#endif
+};
 
 
 static void hids_pm_evt_handler(enum bt_hids_pm_evt evt,
@@ -575,7 +577,6 @@ static void mouse_handler(struct k_work *work)
 		mouse_movement_send(pos.x_val, pos.y_val);
 	}
 }
-#define CONFIG_BT_HIDS_SECURITY_ENABLED
 #if defined(CONFIG_BT_HIDS_SECURITY_ENABLED)
 static void auth_passkey_display(struct bt_conn *conn, unsigned int passkey)
 {
@@ -669,116 +670,116 @@ static struct bt_conn_auth_info_cb conn_auth_info_callbacks;
 #endif /* defined(CONFIG_BT_HIDS_SECURITY_ENABLED) */
 
 
-// static void num_comp_reply(bool accept)
-// {
-// 	struct pairing_data_mitm pairing_data;
-// 	struct bt_conn *conn;
+static void num_comp_reply(bool accept)
+{
+	struct pairing_data_mitm pairing_data;
+	struct bt_conn *conn;
 
-// 	if (k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT) != 0) {
-// 		return;
-// 	}
+	if (k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT) != 0) {
+		return;
+	}
 
-// 	conn = pairing_data.conn;
+	conn = pairing_data.conn;
 
-// 	if (accept) {
-// 		bt_conn_auth_passkey_confirm(conn);
-// 		printk("Numeric Match, conn %p\n", conn);
-// 	} else {
-// 		bt_conn_auth_cancel(conn);
-// 		printk("Numeric Reject, conn %p\n", conn);
-// 	}
+	if (accept) {
+		bt_conn_auth_passkey_confirm(conn);
+		printk("Numeric Match, conn %p\n", conn);
+	} else {
+		bt_conn_auth_cancel(conn);
+		printk("Numeric Reject, conn %p\n", conn);
+	}
 
-// 	bt_conn_unref(pairing_data.conn);
+	bt_conn_unref(pairing_data.conn);
 
-// 	if (k_msgq_num_used_get(&mitm_queue)) {
-// 		k_work_submit(&pairing_work);
-// 	}
-// }
-
-
-// void button_changed(uint32_t button_state, uint32_t has_changed)
-// {
-// 	bool data_to_send = false;
-// 	struct mouse_pos pos;
-// 	uint32_t buttons = button_state & has_changed;
-
-// 	memset(&pos, 0, sizeof(struct mouse_pos));
-
-// 	if (IS_ENABLED(CONFIG_BT_HIDS_SECURITY_ENABLED)) {
-// 		if (k_msgq_num_used_get(&mitm_queue)) {
-// 			if (buttons & KEY_PAIRING_ACCEPT) {
-// 				num_comp_reply(true);
-
-// 				return;
-// 			}
-
-// 			if (buttons & KEY_PAIRING_REJECT) {
-// 				num_comp_reply(false);
-
-// 				return;
-// 			}
-// 		}
-// 	}
-
-// 	if (buttons & KEY_LEFT_MASK) {
-// 		pos.x_val -= MOVEMENT_SPEED;
-// 		printk("%s(): left\n", __func__);
-// 		data_to_send = true;
-// 	}
-// 	if (buttons & KEY_UP_MASK) {
-// 		pos.y_val -= MOVEMENT_SPEED;
-// 		printk("%s(): up\n", __func__);
-// 		data_to_send = true;
-// 	}
-// 	if (buttons & KEY_RIGHT_MASK) {
-// 		pos.x_val += MOVEMENT_SPEED;
-// 		printk("%s(): right\n", __func__);
-// 		data_to_send = true;
-// 	}
-// 	if (buttons & KEY_DOWN_MASK) {
-// 		pos.y_val += MOVEMENT_SPEED;
-// 		printk("%s(): down\n", __func__);
-// 		data_to_send = true;
-// 	}
-
-// 	if (data_to_send) {
-// 		int err;
-
-// 		err = k_msgq_put(&hids_queue, &pos, K_NO_WAIT);
-// 		if (err) {
-// 			printk("No space in the queue for button pressed\n");
-// 			return;
-// 		}
-// 		if (k_msgq_num_used_get(&hids_queue) == 1) {
-// 			k_work_submit(&hids_work);
-// 		}
-// 	}
-// }
+	if (k_msgq_num_used_get(&mitm_queue)) {
+		k_work_submit(&pairing_work);
+	}
+}
 
 
-// void configure_buttons(void)
-// {
-// 	int err;
+void button_changed(uint32_t button_state, uint32_t has_changed)
+{
+	bool data_to_send = false;
+	struct mouse_pos pos;
+	uint32_t buttons = button_state & has_changed;
 
-// 	err = dk_buttons_init(button_changed);
-// 	if (err) {
-// 		printk("Cannot init buttons (err: %d)\n", err);
-// 	}
-// }
+	memset(&pos, 0, sizeof(struct mouse_pos));
+
+	if (IS_ENABLED(CONFIG_BT_HIDS_SECURITY_ENABLED)) {
+		if (k_msgq_num_used_get(&mitm_queue)) {
+			if (buttons & KEY_PAIRING_ACCEPT) {
+				num_comp_reply(true);
+
+				return;
+			}
+
+			if (buttons & KEY_PAIRING_REJECT) {
+				num_comp_reply(false);
+
+				return;
+			}
+		}
+	}
+
+	if (buttons & KEY_LEFT_MASK) {
+		pos.x_val -= MOVEMENT_SPEED;
+		printk("%s(): left\n", __func__);
+		data_to_send = true;
+	}
+	if (buttons & KEY_UP_MASK) {
+		pos.y_val -= MOVEMENT_SPEED;
+		printk("%s(): up\n", __func__);
+		data_to_send = true;
+	}
+	if (buttons & KEY_RIGHT_MASK) {
+		pos.x_val += MOVEMENT_SPEED;
+		printk("%s(): right\n", __func__);
+		data_to_send = true;
+	}
+	if (buttons & KEY_DOWN_MASK) {
+		pos.y_val += MOVEMENT_SPEED;
+		printk("%s(): down\n", __func__);
+		data_to_send = true;
+	}
+
+	if (data_to_send) {
+		int err;
+
+		err = k_msgq_put(&hids_queue, &pos, K_NO_WAIT);
+		if (err) {
+			printk("No space in the queue for button pressed\n");
+			return;
+		}
+		if (k_msgq_num_used_get(&hids_queue) == 1) {
+			k_work_submit(&hids_work);
+		}
+	}
+}
 
 
-// static void bas_notify(void)
-// {
-// 	uint8_t battery_level = bt_bas_get_battery_level();
+void configure_buttons(void)
+{
+	int err;
 
-// 	battery_level--;
+	err = dk_buttons_init(button_changed);
+	if (err) {
+		printk("Cannot init buttons (err: %d)\n", err);
+	}
+}
 
-// 	if (!battery_level) {
-// 		battery_level = 100U;
-// 	}
 
-// 	bt_bas_set_battery_level(battery_level);
-// }
+static void bas_notify(void)
+{
+	uint8_t battery_level = bt_bas_get_battery_level();
+
+	battery_level--;
+
+	if (!battery_level) {
+		battery_level = 100U;
+	}
+
+	bt_bas_set_battery_level(battery_level);
+}
 
 
 int main(void)
@@ -814,21 +815,21 @@ int main(void)
 
 	k_work_init(&hids_work, mouse_handler);
 	k_work_init(&adv_work, advertising_process);
-	// if (IS_ENABLED(CONFIG_BT_HIDS_SECURITY_ENABLED)) {
-	// 	k_work_init(&pairing_work, pairing_process);
-	// }
+	if (IS_ENABLED(CONFIG_BT_HIDS_SECURITY_ENABLED)) {
+		k_work_init(&pairing_work, pairing_process);
+	}
 
-	// if (IS_ENABLED(CONFIG_SETTINGS)) {
-	// 	settings_load();
-	// }
+	if (IS_ENABLED(CONFIG_SETTINGS)) {
+		settings_load();
+	}
 
-	// advertising_start();
+	advertising_start();
 
-	// configure_buttons();
+	configure_buttons();
 
 	while (1) {
-	// 	k_sleep(K_SECONDS(1));
+		k_sleep(K_SECONDS(1));
 	// 	/* Battery level simulation */
-		// bas_notify();
+		bas_notify();
 	}
 }
