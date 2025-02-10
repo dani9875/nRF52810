@@ -28,4 +28,35 @@ config BT_DIRECTED_ADVERTISING
 	default y
 	depends on BT_HIDS_SECURITY_ENABLED
 
+config PMW3360_CPI
+	int "PMW3360's default CPI"
+	default 1600
+	range 100 12000
+	help
+	  Default CPI value.
+
+config PMW3360_RUN_DOWNSHIFT_TIME_MS
+	int "PMW3360's default RUN mode downshift time"
+	default 500
+	range 10 2550
+	help
+	  Default RUN mode downshift down time in milliseconds.
+	  Time after which sensor goes from RUN to REST1 mode.
+
+config PMW3360_REST1_DOWNSHIFT_TIME_MS
+	int "PMW3360's default REST1 mode downshift time"
+	default 9220
+	range 320 81600
+	help
+	  Default REST1 mode downshift down time in milliseconds.
+	  Time after which sensor goes from REST1 to REST2 mode.
+
+config PMW3360_REST2_DOWNSHIFT_TIME_MS
+	int "PMW3360's default REST2 mode downshift time"
+	default 150000
+	range 3200 816000
+	help
+	  Default REST2 mode downshift down time in milliseconds.
+	  Time after which sensor goes from REST2 to REST3 mode.
+
 endmenu

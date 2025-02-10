@@ -1,4 +1,4 @@
-24311439000681112
+24313207658860542
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -98237,6 +98237,13 @@ pepy_sym_lib
 0
 2
 2
+pepy_sym_lib
+[LED_DRIVER]Diodes Incorporated AL8861WT-7
+
+
+0
+5
+5
 pepy_sym_lib
 [MCU]Espressif Systems ESP32-S3-MINI-1-N8
 ESP32-S3-MINI-1
