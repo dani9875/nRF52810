@@ -7904,7 +7904,7 @@
 		(uuid "3a473788-8952-4f4f-ad98-c96211b320e2")
 	)
 	(label "GEN"
-		(at 95.25 48.26 180)
+		(at 95.25 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8168,7 +8168,7 @@
 		(uuid "89545eec-86e8-4aca-82eb-92e25f1124a5")
 	)
 	(label "nRST_MAN"
-		(at 95.25 50.8 180)
+		(at 95.25 68.58 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8179,7 +8179,7 @@
 		(uuid "8a3e3865-d3e2-41ba-ae2e-89f72811189c")
 	)
 	(label "LED"
-		(at 95.25 68.58 180)
+		(at 95.25 48.26 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8507,6 +8507,173 @@
 			(justify left bottom)
 		)
 		(uuid "ffa234ee-7d37-4765-89bb-e802267774b0")
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 280.67 24.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "081d9c4d-86d0-43cb-a36c-25cc00b1add3")
+		(property "Netclass" "Zcontcoplan"
+			(at 281.3685 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 238.76 24.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "291c2ae2-8b74-4bfd-b029-cb7d78194449")
+		(property "Netclass" "Zcontcoplan"
+			(at 239.4585 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 231.14 39.37 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "36f8b51e-dd0f-4d58-8f2f-b536d01aa53b")
+		(property "Netclass" "Zcontcoplan"
+			(at 228.6 38.6715 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 299.72 24.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4454934d-983a-453b-952a-009a7e72fca7")
+		(property "Netclass" "Zcontcoplan"
+			(at 300.4185 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 299.72 35.56 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "735983e3-9725-4a7f-b123-126b464eeb5d")
+		(property "Netclass" "Zcontcoplan"
+			(at 297.18 34.8615 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 303.53 24.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b1fd8f47-1ee4-4b75-bee7-5643934d6cd5")
+		(property "Netclass" "Zcontcoplan"
+			(at 304.2285 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape dot)
+		(at 269.24 24.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f93bdf7a-74f4-4d23-a985-c5451f66fb95")
+		(property "Netclass" "Zcontcoplan"
+			(at 269.9385 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "pepy_sym_lib:[ANTENNA]DN007*1,2.4GHz")
