@@ -9725,6 +9725,72 @@
 		)
 	)
 	(symbol
+		(lib_id "pepy_sym_lib:[TEST_POINT]TestPoint")
+		(at 21.59 64.77 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "21000029-5770-4c2c-b575-cf1ee2420dcf")
+		(property "Reference" "TP4"
+			(at 19.558 57.658 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LED"
+			(at 19.558 59.436 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[TEST_POINT]TestPoint_Pad_D1.0mm"
+			(at 21.336 75.184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 23.622 65.024 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "General test point"
+			(at 21.844 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "64be4ab1-e2db-4601-9294-f7a6d4ec528b")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "TP4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "pepy_sym_lib:[POWER_IND]cjiang (Changjiang Microelectronics Tech) FNR3015S4R7MT")
 		(at 38.1 237.49 0)
 		(unit 1)
@@ -12022,6 +12088,72 @@
 		)
 	)
 	(symbol
+		(lib_id "pepy_sym_lib:[TEST_POINT]TestPoint")
+		(at 185.42 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "4ec03b40-42d2-4aad-9189-cdafa5e16b86")
+		(property "Reference" "TP6"
+			(at 185.166 234.188 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "RIGHT"
+			(at 184.912 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[TEST_POINT]TestPoint_Pad_D1.0mm"
+			(at 185.166 251.714 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.452 241.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "General test point"
+			(at 185.674 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f7084627-1965-41b2-b1e6-d8ea73b96c62")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "TP6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "pepy_sym_lib:[NMOS]Nexperia BSS138PW,115")
 		(at 29.21 64.77 0)
 		(unit 1)
@@ -13524,6 +13656,72 @@
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
 					(reference "#PWR028")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "pepy_sym_lib:[TEST_POINT]TestPoint")
+		(at 135.89 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "73840043-0c01-4fae-a7c7-b89db30da617")
+		(property "Reference" "TP5"
+			(at 135.636 234.188 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LEFT"
+			(at 135.382 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[TEST_POINT]TestPoint_Pad_D1.0mm"
+			(at 135.636 251.714 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.922 241.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "General test point"
+			(at 136.144 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4cb79e19-f78d-4cc1-beaf-f3174247e725")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "TP5")
 					(unit 1)
 				)
 			)
@@ -17926,6 +18124,72 @@
 		)
 	)
 	(symbol
+		(lib_id "pepy_sym_lib:[TEST_POINT]TestPoint")
+		(at 232.41 241.3 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "dc8e356b-da0c-403b-a3fa-1abca32a744c")
+		(property "Reference" "TP7"
+			(at 239.522 241.046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "nRESET"
+			(at 237.49 240.792 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[TEST_POINT]TestPoint_Pad_D1.0mm"
+			(at 221.996 241.046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 232.156 243.332 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "General test point"
+			(at 224.79 241.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "59149c9f-7b53-489b-a505-7493e56eab6e")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "TP7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 163.83 71.12 0)
 		(unit 1)
@@ -18529,6 +18793,72 @@
 			(project "nRF52810"
 				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
 					(reference "MH2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "pepy_sym_lib:[TEST_POINT]TestPoint")
+		(at 27.94 100.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "f3528481-0bbb-4f59-9dc7-717ef2f1f303")
+		(property "Reference" "TP3"
+			(at 25.908 93.218 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Vtref"
+			(at 25.908 94.996 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "pepy_sym_lib:[TEST_POINT]TestPoint_Pad_D1.0mm"
+			(at 27.686 110.744 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 29.972 100.584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "General test point"
+			(at 28.194 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fe996dc5-1c41-4a2c-be64-17fb36313c4c")
+		)
+		(instances
+			(project "nRF52810"
+				(path "/c3c214d8-50a8-4338-bfa9-1911565df485"
+					(reference "TP3")
 					(unit 1)
 				)
 			)
