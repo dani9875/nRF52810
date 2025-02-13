@@ -8,6 +8,36 @@
 #include <nordic/nrf52840_partition.dtsi>
 #include "bt_hid_opt_mouse_pinctrl.dtsi"
 
+&gpio0 {
+	status = "okay";
+};
+
+
 / {
-	model = "Optical mouse v2_0 test phase";
+	model = "Basic board for nRF52810";
+	compatible = "vendor,basic_nrf52810";
+
+	aliases {
+		led0 = &myled0;
+	};
+
+	chosen {
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+
+     leds {
+            compatible = "gpio-leds";
+            myled0: led_0 {
+		         gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+             };
+     };
+};
+
+&uicr {
+	gpio-as-nreset;
+};
+
+&gpiote {
+	status = "okay";
 };

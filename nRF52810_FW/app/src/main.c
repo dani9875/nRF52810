@@ -11,7 +11,7 @@
 #include <zephyr/sys/printk.h>
 #include <zephyr/sys/byteorder.h>
 #include <zephyr/kernel.h>
-// #include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/gpio.h>
 #include <soc.h>
 #include <assert.h>
 
@@ -786,7 +786,7 @@ int main(void)
 {
 	int err;
 
-	// printk("Starting Bluetooth Peripheral HIDS mouse example\n");
+	printk("Starting Bluetooth Peripheral HIDS mouse example\n");
 
 	// if (IS_ENABLED(CONFIG_BT_HIDS_SECURITY_ENABLED)) {
 	// 	err = bt_conn_auth_cb_register(&conn_auth_callbacks);
