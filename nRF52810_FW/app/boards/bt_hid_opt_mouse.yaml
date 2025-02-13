@@ -1,0 +1,15 @@
+identifier: bt_hid_opt_mouse
+name: BT HID optical mouse
+vendor: perseluspy
+type: mcu
+arch: arm
+ram: 24
+flash: 192
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+supported:
+  - gpio
+  - bt
+  - spi

@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) 2021 Nordic Semiconductor ASA
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <nordic/nrf52810_qfaa.dtsi>
+#include <nordic/nrf52840_partition.dtsi>
+#include "bt_hid_opt_mouse_pinctrl.dtsi"
+
+/ {
+	model = "Optical mouse v2_0 test phase";
+};

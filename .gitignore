@@ -5,6 +5,9 @@ nRF52810_FW/zephyr
 nRF52810_FW/bootloader
 nRF52810_FW/nrf
 nRF52810_FW/test
+nRF52810_FW/app/build
+nRF52810_FW/app/CMakeFiles
+nRF52810_FW/app/CMakeCache.txt
 nRF52810_FW/nrfxlib
 nRF52810_HW/fp-info-cache
 nRF52810_HW/fabrication_output
