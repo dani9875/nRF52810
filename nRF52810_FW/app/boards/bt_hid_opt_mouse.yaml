@@ -11,5 +11,3 @@ toolchain:
   - xtools
 supported:
   - gpio
-  - bt
-  - spi
