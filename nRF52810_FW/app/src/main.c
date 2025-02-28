@@ -27,12 +27,12 @@
 // #include <bluetooth/services/hids.h>
 // #include <zephyr/bluetooth/services/dis.h>
 
-#define DEVICE_NAME     CONFIG_BT_DEVICE_NAME
-#define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
+// #define DEVICE_NAME     CONFIG_BT_DEVICE_NAME
+// #define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
 
-#define BASE_USB_HID_SPEC_VERSION   0x0101
-#define CONFIG_BT_DIRECTED_ADVERTISING 1
-// #define CONFIG_BT_HIDS_SECURITY_ENABLED 1
+// #define BASE_USB_HID_SPEC_VERSION   0x0101
+// #define CONFIG_BT_DIRECTED_ADVERTISING 1
+// // #define CONFIG_BT_HIDS_SECURITY_ENABLED 1
 
 
 
@@ -75,11 +75,11 @@
 // // #define KEY_PAIRING_ACCEPT DK_BTN1_MSK
 // // #define KEY_PAIRING_REJECT DK_BTN2_MSK
 
-// // /* HIDS instance. */
-// // BT_HIDS_DEF(hids_obj,
-// // 	    INPUT_REP_BUTTONS_LEN,
-// // 	    INPUT_REP_MOVEMENT_LEN,
-// // 	    INPUT_REP_MEDIA_PLAYER_LEN);
+// // // /* HIDS instance. */
+// // // BT_HIDS_DEF(hids_obj,
+// // // 	    INPUT_REP_BUTTONS_LEN,
+// // // 	    INPUT_REP_MOVEMENT_LEN,
+// // // 	    INPUT_REP_MEDIA_PLAYER_LEN);
 
 // static struct k_work hids_work;
 // struct mouse_pos {
@@ -93,279 +93,279 @@
 // // 	      HIDS_QUEUE_SIZE,
 // // 	      4);
 
-// // #if CONFIG_BT_DIRECTED_ADVERTISING
-// // /* Bonded address queue. */
-// // K_MSGQ_DEFINE(bonds_queue,
-// // 	      sizeof(bt_addr_le_t),
-// // 	      CONFIG_BT_MAX_PAIRED,
-// // 	      4);
-// // #endif
+// // // #if CONFIG_BT_DIRECTED_ADVERTISING
+// // // /* Bonded address queue. */
+// // // K_MSGQ_DEFINE(bonds_queue,
+// // // 	      sizeof(bt_addr_le_t),
+// // // 	      CONFIG_BT_MAX_PAIRED,
+// // // 	      4);
+// // // #endif
 
-// // static const struct bt_data ad[] = {
-// // 	BT_DATA_BYTES(BT_DATA_GAP_APPEARANCE,
-// // 		      (CONFIG_BT_DEVICE_APPEARANCE >> 0) & 0xff,
-// // 		      (CONFIG_BT_DEVICE_APPEARANCE >> 8) & 0xff),
-// // 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
-// // 	BT_DATA_BYTES(BT_DATA_UUID16_ALL, BT_UUID_16_ENCODE(BT_UUID_HIDS_VAL),
-// // 					  BT_UUID_16_ENCODE(BT_UUID_BAS_VAL)),
-// // };
+// // // static const struct bt_data ad[] = {
+// // // 	BT_DATA_BYTES(BT_DATA_GAP_APPEARANCE,
+// // // 		      (CONFIG_BT_DEVICE_APPEARANCE >> 0) & 0xff,
+// // // 		      (CONFIG_BT_DEVICE_APPEARANCE >> 8) & 0xff),
+// // // 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
+// // // 	BT_DATA_BYTES(BT_DATA_UUID16_ALL, BT_UUID_16_ENCODE(BT_UUID_HIDS_VAL),
+// // // 					  BT_UUID_16_ENCODE(BT_UUID_BAS_VAL)),
+// // // };
 
-// // static const struct bt_data sd[] = {
-// // 	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
-// // };
+// // // static const struct bt_data sd[] = {
+// // // 	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
+// // // };
 
 // static struct conn_mode {
 // 	struct bt_conn *conn;
 // 	bool in_boot_mode;
 // } conn_mode[CONFIG_BT_HIDS_MAX_CLIENT_COUNT];
 
-// // static volatile bool is_adv_running;
+// static volatile bool is_adv_running;
 
-// // static struct k_work adv_work;
+// static struct k_work adv_work;
 
-// // static struct k_work pairing_work;
-// // struct pairing_data_mitm {
-// // 	struct bt_conn *conn;
-// // 	unsigned int passkey;
-// // };
+// // // static struct k_work pairing_work;
+// // // struct pairing_data_mitm {
+// // // 	struct bt_conn *conn;
+// // // 	unsigned int passkey;
+// // // };
 
-// // K_MSGQ_DEFINE(mitm_queue,
-// // 	      sizeof(struct pairing_data_mitm),
-// // 	      CONFIG_BT_HIDS_MAX_CLIENT_COUNT,
-// // 	      4);
+// // // K_MSGQ_DEFINE(mitm_queue,
+// // // 	      sizeof(struct pairing_data_mitm),
+// // // 	      CONFIG_BT_HIDS_MAX_CLIENT_COUNT,
+// // // 	      4);
 
-// // #if CONFIG_BT_DIRECTED_ADVERTISING
-// // static void bond_find(const struct bt_bond_info *info, void *user_data)
-// // {
-// // 	int err;
+// // // #if CONFIG_BT_DIRECTED_ADVERTISING
+// // // static void bond_find(const struct bt_bond_info *info, void *user_data)
+// // // {
+// // // 	int err;
 
-// // 	/* Filter already connected peers. */
-// // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// // 		if (conn_mode[i].conn) {
-// // 			const bt_addr_le_t *dst =
-// // 				bt_conn_get_dst(conn_mode[i].conn);
+// // // 	/* Filter already connected peers. */
+// // // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+// // // 		if (conn_mode[i].conn) {
+// // // 			const bt_addr_le_t *dst =
+// // // 				bt_conn_get_dst(conn_mode[i].conn);
 
-// // 			if (!bt_addr_le_cmp(&info->addr, dst)) {
-// // 				return;
-// // 			}
-// // 		}
-// // 	}
+// // // 			if (!bt_addr_le_cmp(&info->addr, dst)) {
+// // // 				return;
+// // // 			}
+// // // 		}
+// // // 	}
 
-// // 	err = k_msgq_put(&bonds_queue, (void *) &info->addr, K_NO_WAIT);
-// // 	if (err) {
-// // 		printk("No space in the queue for the bond.\n");
-// // 	}
-// // }
-// // #endif
+// // // 	err = k_msgq_put(&bonds_queue, (void *) &info->addr, K_NO_WAIT);
+// // // 	if (err) {
+// // // 		printk("No space in the queue for the bond.\n");
+// // // 	}
+// // // }
+// // // #endif
 
-// // static void advertising_continue(void)
-// // {
-// // 	struct bt_le_adv_param adv_param;
-// // #if CONFIG_BT_DIRECTED_ADVERTISING
-// // 	bt_addr_le_t addr;
+// // // static void advertising_continue(void)
+// // // {
+// // // 	struct bt_le_adv_param adv_param;
+// // // #if CONFIG_BT_DIRECTED_ADVERTISING
+// // // 	bt_addr_le_t addr;
 
-// // 	if (!k_msgq_get(&bonds_queue, &addr, K_NO_WAIT)) {
-// // 		char addr_buf[BT_ADDR_LE_STR_LEN];
-// // 		int err;
+// // // 	if (!k_msgq_get(&bonds_queue, &addr, K_NO_WAIT)) {
+// // // 		char addr_buf[BT_ADDR_LE_STR_LEN];
+// // // 		int err;
 
-// // 		if (is_adv_running) {
-// // 			err = bt_le_adv_stop();
-// // 			if (err) {
-// // 				printk("Advertising failed to stop (err %d)\n", err);
-// // 				return;
-// // 			}
-// // 			is_adv_running = false;
-// // 		}
+// // // 		if (is_adv_running) {
+// // // 			err = bt_le_adv_stop();
+// // // 			if (err) {
+// // // 				printk("Advertising failed to stop (err %d)\n", err);
+// // // 				return;
+// // // 			}
+// // // 			is_adv_running = false;
+// // // 		}
 
-// // 		adv_param = *BT_LE_ADV_CONN_DIR(&addr);
-// // 		adv_param.options |= BT_LE_ADV_OPT_DIR_ADDR_RPA;
+// // // 		adv_param = *BT_LE_ADV_CONN_DIR(&addr);
+// // // 		adv_param.options |= BT_LE_ADV_OPT_DIR_ADDR_RPA;
 
-// // 		err = bt_le_adv_start(&adv_param, NULL, 0, NULL, 0);
+// // // 		err = bt_le_adv_start(&adv_param, NULL, 0, NULL, 0);
 
-// // 		if (err) {
-// // 			printk("Directed advertising failed to start (err %d)\n", err);
-// // 			return;
-// // 		}
+// // // 		if (err) {
+// // // 			printk("Directed advertising failed to start (err %d)\n", err);
+// // // 			return;
+// // // 		}
 
-// // 		bt_addr_le_to_str(&addr, addr_buf, BT_ADDR_LE_STR_LEN);
-// // 		printk("Direct advertising to %s started\n", addr_buf);
-// // 	} else
-// // #endif
-// // 	{
-// // 		int err;
+// // // 		bt_addr_le_to_str(&addr, addr_buf, BT_ADDR_LE_STR_LEN);
+// // // 		printk("Direct advertising to %s started\n", addr_buf);
+// // // 	} else
+// // // #endif
+// // // 	{
+// // // 		int err;
 
-// // 		if (is_adv_running) {
-// // 			return;
-// // 		}
+// // // 		if (is_adv_running) {
+// // // 			return;
+// // // 		}
 
-// // 		adv_param = *BT_LE_ADV_CONN;
-// // 		adv_param.options |= BT_LE_ADV_OPT_ONE_TIME;
-// // 		err = bt_le_adv_start(&adv_param, ad, ARRAY_SIZE(ad),
-// // 				  sd, ARRAY_SIZE(sd));
-// // 		if (err) {
-// // 			printk("Advertising failed to start (err %d)\n", err);
-// // 			return;
-// // 		}
+// // // 		adv_param = *BT_LE_ADV_CONN;
+// // // 		adv_param.options |= BT_LE_ADV_OPT_ONE_TIME;
+// // // 		err = bt_le_adv_start(&adv_param, ad, ARRAY_SIZE(ad),
+// // // 				  sd, ARRAY_SIZE(sd));
+// // // 		if (err) {
+// // // 			printk("Advertising failed to start (err %d)\n", err);
+// // // 			return;
+// // // 		}
 
-// // 		printk("Regular advertising started\n");
-// // 	}
+// // // 		printk("Regular advertising started\n");
+// // // 	}
 
-// // 	is_adv_running = true;
-// // }
+// // // 	is_adv_running = true;
+// // // }
 
-// // static void advertising_start(void)
-// // {
-// // #if CONFIG_BT_DIRECTED_ADVERTISING
-// // 	k_msgq_purge(&bonds_queue);
-// // 	bt_foreach_bond(BT_ID_DEFAULT, bond_find, NULL);
-// // #endif
+// // // static void advertising_start(void)
+// // // {
+// // // #if CONFIG_BT_DIRECTED_ADVERTISING
+// // // 	k_msgq_purge(&bonds_queue);
+// // // 	bt_foreach_bond(BT_ID_DEFAULT, bond_find, NULL);
+// // // #endif
 
-// // 	k_work_submit(&adv_work);
-// // }
+// // // 	k_work_submit(&adv_work);
+// // // }
 
-// // static void advertising_process(struct k_work *work)
-// // {
-// // 	advertising_continue();
-// // }
+// // // static void advertising_process(struct k_work *work)
+// // // {
+// // // 	advertising_continue();
+// // // }
 
-// // static void pairing_process(struct k_work *work)
-// // {
-// // 	int err;
-// // 	struct pairing_data_mitm pairing_data;
+// // // static void pairing_process(struct k_work *work)
+// // // {
+// // // 	int err;
+// // // 	struct pairing_data_mitm pairing_data;
 
-// // 	char addr[BT_ADDR_LE_STR_LEN];
+// // // 	char addr[BT_ADDR_LE_STR_LEN];
 
-// // 	err = k_msgq_peek(&mitm_queue, &pairing_data);
-// // 	if (err) {
-// // 		return;
-// // 	}
+// // // 	err = k_msgq_peek(&mitm_queue, &pairing_data);
+// // // 	if (err) {
+// // // 		return;
+// // // 	}
 
-// // 	bt_addr_le_to_str(bt_conn_get_dst(pairing_data.conn),
-// // 			  addr, sizeof(addr));
+// // // 	bt_addr_le_to_str(bt_conn_get_dst(pairing_data.conn),
+// // // 			  addr, sizeof(addr));
 
-// // 	printk("Passkey for %s: %06u\n", addr, pairing_data.passkey);
+// // // 	printk("Passkey for %s: %06u\n", addr, pairing_data.passkey);
 
-// // 	if (IS_ENABLED(CONFIG_SOC_SERIES_NRF54HX) || IS_ENABLED(CONFIG_SOC_SERIES_NRF54LX)) {
-// // 		printk("Press Button 0 to confirm, Button 1 to reject.\n");
-// // 	} else {
-// // 		printk("Press Button 1 to confirm, Button 2 to reject.\n");
-// // 	}
-// // }
-
-
-// // static void insert_conn_object(struct bt_conn *conn)
-// // {
-// // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// // 		if (!conn_mode[i].conn) {
-// // 			conn_mode[i].conn = conn;
-// // 			conn_mode[i].in_boot_mode = false;
-
-// // 			return;
-// // 		}
-// // 	}
-
-// // 	printk("Connection object could not be inserted %p\n", conn);
-// // }
+// // // 	if (IS_ENABLED(CONFIG_SOC_SERIES_NRF54HX) || IS_ENABLED(CONFIG_SOC_SERIES_NRF54LX)) {
+// // // 		printk("Press Button 0 to confirm, Button 1 to reject.\n");
+// // // 	} else {
+// // // 		printk("Press Button 1 to confirm, Button 2 to reject.\n");
+// // // 	}
+// // // }
 
 
-// // static bool is_conn_slot_free(void)
-// // {
-// // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// // 		if (!conn_mode[i].conn) {
-// // 			return true;
-// // 		}
-// // 	}
+// // // static void insert_conn_object(struct bt_conn *conn)
+// // // {
+// // // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+// // // 		if (!conn_mode[i].conn) {
+// // // 			conn_mode[i].conn = conn;
+// // // 			conn_mode[i].in_boot_mode = false;
 
-// // 	return false;
-// // }
+// // // 			return;
+// // // 		}
+// // // 	}
 
-
-// // static void connected(struct bt_conn *conn, uint8_t err)
-// // {
-// // 	char addr[BT_ADDR_LE_STR_LEN];
-
-// // 	is_adv_running = false;
-
-// // 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
-// // 	if (err) {
-// // 		if (err == BT_HCI_ERR_ADV_TIMEOUT) {
-// // 			printk("Direct advertising to %s timed out\n", addr);
-// // 			k_work_submit(&adv_work);
-// // 		} else {
-// // 			printk("Failed to connect to %s 0x%02x %s\n", addr, err,
-// // 			       bt_hci_err_to_str(err));
-// // 		}
-// // 		return;
-// // 	}
-
-// // 	printk("Connected %s\n", addr);
-
-// // 	err = bt_hids_connected(&hids_obj, conn);
-
-// // 	if (err) {
-// // 		printk("Failed to notify HID service about connection\n");
-// // 		return;
-// // 	}
-
-// // 	insert_conn_object(conn);
-
-// // 	if (is_conn_slot_free()) {
-// // 		advertising_start();
-// // 	}
-// // }
+// // // 	printk("Connection object could not be inserted %p\n", conn);
+// // // }
 
 
-// // static void disconnected(struct bt_conn *conn, uint8_t reason)
-// // {
-// // 	int err;
-// // 	char addr[BT_ADDR_LE_STR_LEN];
+// // // static bool is_conn_slot_free(void)
+// // // {
+// // // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+// // // 		if (!conn_mode[i].conn) {
+// // // 			return true;
+// // // 		}
+// // // 	}
 
-// // 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-
-// // 	printk("Disconnected from %s, reason 0x%02x %s\n", addr, reason, bt_hci_err_to_str(reason));
-
-// // 	err = bt_hids_disconnected(&hids_obj, conn);
-
-// // 	if (err) {
-// // 		printk("Failed to notify HID service about disconnection\n");
-// // 	}
-
-// // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
-// // 		if (conn_mode[i].conn == conn) {
-// // 			conn_mode[i].conn = NULL;
-// // 			break;
-// // 		}
-// // 	}
-
-// // 	advertising_start();
-// // }
+// // // 	return false;
+// // // }
 
 
-// // #ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
-// // static void security_changed(struct bt_conn *conn, bt_security_t level,
-// // 			     enum bt_security_err err)
-// // {
-// // 	char addr[BT_ADDR_LE_STR_LEN];
+// // // static void connected(struct bt_conn *conn, uint8_t err)
+// // // {
+// // // 	char addr[BT_ADDR_LE_STR_LEN];
 
-// // 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+// // // 	is_adv_running = false;
 
-// // 	if (!err) {
-// // 		printk("Security changed: %s level %u\n", addr, level);
-// // 	} else {
-// // 		printk("Security failed: %s level %u err %d %s\n", addr, level, err,
-// // 		       bt_security_err_to_str(err));
-// // 	}
-// // }
-// // #endif
+// // // 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
 
-// // BT_CONN_CB_DEFINE(conn_callbacks) = {
-// // 	.connected = connected,
-// // 	.disconnected = disconnected,
-// // #ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
-// // 	.security_changed = security_changed,
-// // #endif
-// // };
+// // // 	if (err) {
+// // // 		if (err == BT_HCI_ERR_ADV_TIMEOUT) {
+// // // 			printk("Direct advertising to %s timed out\n", addr);
+// // // 			k_work_submit(&adv_work);
+// // // 		} else {
+// // // 			printk("Failed to connect to %s 0x%02x %s\n", addr, err,
+// // // 			       bt_hci_err_to_str(err));
+// // // 		}
+// // // 		return;
+// // // 	}
+
+// // // 	printk("Connected %s\n", addr);
+
+// // // 	err = bt_hids_connected(&hids_obj, conn);
+
+// // // 	if (err) {
+// // // 		printk("Failed to notify HID service about connection\n");
+// // // 		return;
+// // // 	}
+
+// // // 	insert_conn_object(conn);
+
+// // // 	if (is_conn_slot_free()) {
+// // // 		advertising_start();
+// // // 	}
+// // // }
+
+
+// // // static void disconnected(struct bt_conn *conn, uint8_t reason)
+// // // {
+// // // 	int err;
+// // // 	char addr[BT_ADDR_LE_STR_LEN];
+
+// // // 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+
+// // // 	printk("Disconnected from %s, reason 0x%02x %s\n", addr, reason, bt_hci_err_to_str(reason));
+
+// // // 	err = bt_hids_disconnected(&hids_obj, conn);
+
+// // // 	if (err) {
+// // // 		printk("Failed to notify HID service about disconnection\n");
+// // // 	}
+
+// // // 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++) {
+// // // 		if (conn_mode[i].conn == conn) {
+// // // 			conn_mode[i].conn = NULL;
+// // // 			break;
+// // // 		}
+// // // 	}
+
+// // // 	advertising_start();
+// // // }
+
+
+// // // #ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
+// // // static void security_changed(struct bt_conn *conn, bt_security_t level,
+// // // 			     enum bt_security_err err)
+// // // {
+// // // 	char addr[BT_ADDR_LE_STR_LEN];
+
+// // // 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+
+// // // 	if (!err) {
+// // // 		printk("Security changed: %s level %u\n", addr, level);
+// // // 	} else {
+// // // 		printk("Security failed: %s level %u err %d %s\n", addr, level, err,
+// // // 		       bt_security_err_to_str(err));
+// // // 	}
+// // // }
+// // // #endif
+
+// // // BT_CONN_CB_DEFINE(conn_callbacks) = {
+// // // 	.connected = connected,
+// // // 	.disconnected = disconnected,
+// // // #ifdef CONFIG_BT_HIDS_SECURITY_ENABLED
+// // // 	.security_changed = security_changed,
+// // // #endif
+// // // };
 
 
 // static void hids_pm_evt_handler(enum bt_hids_pm_evt evt,
@@ -785,7 +785,7 @@ int main(void)
 {
 	int err;
 
-	printk("Starting Bluetooth Peripheral HIDS mouse example\n");
+	// printk("Starting Bluetooth Peripheral HIDS mouse example\n");
 
 	// if (IS_ENABLED(CONFIG_BT_HIDS_SECURITY_ENABLED)) {
 	// 	err = bt_conn_auth_cb_register(&conn_auth_callbacks);
@@ -804,7 +804,7 @@ int main(void)
 	/* DIS initialized at system boot with SYS_INIT macro. */
 	// hid_init();
 
-	// err = bt_enable(NULL);
+	// // err = bt_enable(NULL);
 	// if (err) {
 	// 	printk("Bluetooth init failed (err %d)\n", err);
 	// 	return 0;
