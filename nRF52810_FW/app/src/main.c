@@ -17,14 +17,131 @@
 #include <soc.h>
 #include <assert.h>
 
+
+#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/uuid.h>
+#include <zephyr/bluetooth/gatt.h>
+#include <zephyr/bluetooth/hci.h>
+
 #include <zephyr/settings/settings.h>
+#define DEVICE_NAME		"Remote"
+#define DEVICE_NAME_LEN		(sizeof(DEVICE_NAME) - 1)
+
 
 #define LED_NODE DT_ALIAS(led0)
 #if !DT_NODE_HAS_STATUS(LED_NODE, okay)
 #error "Unsupported board: led0 devicetree alias is not defined"
 #endif
 
+
+
+/** @brief UUID of the Remote Service. **/
+#define BT_UUID_REMOTE_SERV_VAL \
+	BT_UUID_128_ENCODE(0xe9ea0001, 0xe19b, 0x482d, 0x9293, 0xc7907585fc48)
+
+/** @brief UUID of the Button Characteristic. **/
+#define BT_UUID_REMOTE_BUTTON_CHRC_VAL \
+	BT_UUID_128_ENCODE(0xe9ea0002, 0xe19b, 0x482d, 0x9293, 0xc7907585fc48)
+
+/** @brief UUID of the Message Characteristic. **/
+#define BT_UUID_REMOTE_MESSAGE_CHRC_VAL \
+	BT_UUID_128_ENCODE(0xe9ea0003, 0xe19b, 0x482d, 0x9293, 0xc7907585fc48)
+
+#define BT_UUID_REMOTE_SERVICE          BT_UUID_DECLARE_128(BT_UUID_REMOTE_SERV_VAL)
+#define BT_UUID_REMOTE_BUTTON_CHRC 	    BT_UUID_DECLARE_128(BT_UUID_REMOTE_BUTTON_CHRC_VAL)
+#define BT_UUID_REMOTE_MESSAGE_CHRC     BT_UUID_DECLARE_128(BT_UUID_REMOTE_MESSAGE_CHRC_VAL)
+
+static const struct bt_data ad[] = {
+    BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
+    BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN)
+};
+
+static const struct bt_data sd[] = {
+    BT_DATA_BYTES(BT_DATA_UUID128_ALL, BT_UUID_REMOTE_SERV_VAL),
+};
+
+enum bt_button_notifications_enabled {
+	BT_BUTTON_NOTIFICATIONS_ENABLED,
+	BT_BUTTON_NOTIFICATIONS_DISABLED,
+};
+
+struct bt_remote_service_cb {
+	void (*notif_changed)(enum bt_button_notifications_enabled status);
+    void (*data_received)(struct bt_conn *conn, const uint8_t *const data, uint16_t len);
+};
+
+static K_SEM_DEFINE(bt_init_ok, 1, 1);
+
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
+
+static struct bt_remote_service_cb remote_callbacks;
+
+static struct bt_conn *current_conn;
+
+/* Declarations */
+void on_connected(struct bt_conn *conn, uint8_t err);
+void on_disconnected(struct bt_conn *conn, uint8_t reason);
+void on_notif_changed(enum bt_button_notifications_enabled status);
+void on_data_received(struct bt_conn *conn, const uint8_t *const data, uint16_t len);
+
+struct bt_conn_cb bluetooth_callbacks = {
+	.connected 		= on_connected,
+	.disconnected 	= on_disconnected,
+};
+struct bt_remote_service_cb remote_callbacks_s = {
+	.notif_changed = on_notif_changed,
+    .data_received = on_data_received,
+};
+
+// /* Callbacks */
+
+void bt_ready(int err)
+{
+    if (err) {
+        printk("bt_ready returned %d", err);
+    }
+    k_sem_give(&bt_init_ok);
+}
+
+void on_connected(struct bt_conn *conn, uint8_t err)
+{
+	if(err) {
+		printk("connection err: %d", err);
+		return;
+	}
+	printk("Connected.");
+	current_conn = bt_conn_ref(conn);
+}
+
+void on_disconnected(struct bt_conn *conn, uint8_t reason)
+{
+	printk("Disconnected (reason: %d)", reason);
+	if(current_conn) 
+	{
+		bt_conn_unref(current_conn);
+		current_conn = NULL;
+	}
+}
+
+void on_notif_changed(enum bt_button_notifications_enabled status)
+{
+	if (status == BT_BUTTON_NOTIFICATIONS_ENABLED) {
+		printk("Notifications enabled");
+	}
+	else {
+		printk("Notificatons disabled");
+	}
+}
+
+void on_data_received(struct bt_conn *conn, const uint8_t *const data, uint16_t len)
+{
+	uint8_t temp_str[len+1];
+	memcpy(temp_str, data, len);
+	temp_str[len] = 0x00;
+
+	printk("Received data on conn %p. Len: %d", (void *)conn, len);
+	// printk("Data: %d", log_strdup(temp_str));
+}
 
 // #include <zephyr/bluetooth/bluetooth.h>
 // #include <zephyr/bluetooth/hci.h>
@@ -838,17 +955,37 @@ int main(void)
 
     int ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
     if (ret < 0) {
-        // LOG_ERR("Failed to configure LED pin");
+        printk("Failed to configure LED pin");
         return;
     }
 
     printk("Blinking LED on P0.20\n");
+	bt_conn_cb_register(&bluetooth_callbacks);
+    remote_callbacks.notif_changed = remote_callbacks_s.notif_changed;
+
+    err = bt_enable(bt_ready);
+    if (err) {
+        printk("bt_enable returned %d", err);
+        return err;
+    }
+
+	k_sem_take(&bt_init_ok, K_FOREVER);
+
+    err = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), sd, ARRAY_SIZE(sd));
+    if (err) {
+        printk("Couldn't start advertising (err = %d)", err);
+        return err;
+    }
+    
+
 	
 
 	while (1) {
 		// k_sleep(K_SECONDS(1));
 		gpio_pin_toggle_dt(&led);
-        k_sleep(K_MSEC(1000));
+        k_sleep(K_MSEC(3000));
+		printk("Blinking LED on P0.20\n");
+
 	// 	/* Battery level simulation */
 		// bas_notify();
 	}
