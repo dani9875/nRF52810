@@ -1,0 +1,13 @@
+identifier: custom_plank
+name: custom_plank
+type: mcu
+arch: arm
+ram: 24
+flash: 196
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+supported:
+  - gpio
+vendor: nordic
