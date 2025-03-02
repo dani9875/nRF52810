@@ -29,8 +29,13 @@
 	buttons {
 		compatible = "gpio-keys";
 		button0: button_0 {
-			gpios = <&gpio0 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-			label = "Push button switch 0";
+			gpios = <&gpio0 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Left click";
+			zephyr,code = <INPUT_KEY_0>;
+		};
+                button1: button_1 {
+			gpios = <&gpio0 6 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Right click";
 			zephyr,code = <INPUT_KEY_0>;
 		};
 
@@ -41,8 +46,8 @@
 	/* These aliases are provided for compatibility with samples */
 	aliases {
 		led0 = &led0;
-		sw0 = &button0;
-
+		left = &button0;
+                right = &button1;
 	};
 };
 
@@ -64,7 +69,22 @@
 	status = "okay";
 	current-speed = <115200>;
 	pinctrl-0 = <&uart0_default>;
-	pinctrl-1 = <&uart0_sleep>;
-	pinctrl-names = "default", "sleep";
+	pinctrl-names = "default";
 };
+
+&spi0 {
+        compatible = "nordic,nrf-spi";
+        status = "okay";
+        cs-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+        pinctrl-0 = <&spi0_default>;
+        pinctrl-names = "default";
+        gendev: gendev@0 {
+                compatible = "vnd,spi-device";
+                reg = <0>;
+                spi-max-frequency = <1600000>;
+                label = "GenDev";
+        };
+};
+
+
 
