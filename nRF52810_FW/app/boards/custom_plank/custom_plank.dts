@@ -1,0 +1,96 @@
+/*
+ * Copyright (c) 2017 Linaro Limited
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <nordic/nrf52810_qfaa.dtsi>
+#include <nordic/nrf52840_partition.dtsi>
+#include "custom_plank-pinctrl.dtsi"
+
+/ {
+	model = "Custom";
+	compatible = "nordic,nRF52810";
+
+	chosen {
+		zephyr,console = &uart0;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		led0: led_0 {
+			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
+			label = "Green LED 0";
+		};
+
+	};
+
+	buttons {
+		compatible = "gpio-keys";
+		button0: button_0 {
+			gpios = <&gpio0 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Left click";
+			zephyr,code = <INPUT_KEY_0>;
+		};
+                button1: button_1 {
+			gpios = <&gpio0 6 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Right click";
+			zephyr,code = <INPUT_KEY_0>;
+		};
+                button2: button_2 {
+			gpios = <&gpio0 18 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "MTN INT";
+			zephyr,code = <INPUT_KEY_0>;
+		};
+
+	};
+
+
+
+	/* These aliases are provided for compatibility with samples */
+	aliases {
+		led0 = &led0;
+		left = &button0;
+                right = &button1;
+                mtn = &button2;
+	};
+};
+
+&uicr {
+	gpio-as-nreset;
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+
+&uart0 {
+	compatible = "nordic,nrf-uarte";
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-names = "default";
+};
+
+&spi0 {
+        compatible = "nordic,nrf-spi";
+        status = "okay";
+        cs-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+        pinctrl-0 = <&spi0_default>;
+        pinctrl-names = "default";
+        gendev: gendev@0 {
+                compatible = "vnd,spi-device";
+                reg = <0>;
+                spi-max-frequency = <1600000>;
+                label = "GenDev";
+        };
+};
+
+
+

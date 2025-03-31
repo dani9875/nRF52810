@@ -1,5 +1,5 @@
 # Copyright (c) 2021 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
-config BOARD_BASIC_NRF52810
+config BOARD_BT_HID_OPT_MOUSE
 	select SOC_NRF52810_QFAA

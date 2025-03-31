@@ -1,0 +1,6 @@
+board:
+  name: bt_hid_opt_mouse
+  full_name: BT HID optical mouse
+  vendor: perseluspy
+  socs:
+  - name: nrf52810

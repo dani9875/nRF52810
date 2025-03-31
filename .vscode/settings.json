@@ -1,3 +1,18 @@
 {
-    "nrf-connect.toolchain.path": "${nrf-connect.toolchain:2.7.0}"
+    "nrf-connect.toolchain.path": "${nrf-connect.toolchain:2.7.0}",
+    "files.associations": {
+        "bas.h": "c",
+        "spi.h": "c",
+        "pmw3360.h": "c",
+        "log.h": "c",
+        "array": "c",
+        "iterator": "c",
+        "string_view": "c",
+        "string": "c",
+        "span": "c",
+        "mfd_ite_it8801.h": "c"
+    },
+    "nrf-connect.applications": [
+        "${workspaceFolder}/nRF52810_FW/app"
+    ]
 }

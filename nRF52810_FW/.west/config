@@ -1,5 +1,5 @@
 [manifest]
-path = zephyr
+path = app
 file = west.yml
 
 [zephyr]

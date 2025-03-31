@@ -1,0 +1,7 @@
+board:
+  name: custom_plank
+  full_name: nRF52810 DK
+  vendor: nordic
+  socs:
+  # Physical nRF52840 SoC on PCA10056
+  - name: nrf52810
