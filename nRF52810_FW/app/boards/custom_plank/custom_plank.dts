@@ -38,6 +38,11 @@
 			label = "Right click";
 			zephyr,code = <INPUT_KEY_0>;
 		};
+                button2: button_2 {
+			gpios = <&gpio0 18 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "MTN INT";
+			zephyr,code = <INPUT_KEY_0>;
+		};
 
 	};
 
@@ -48,6 +53,7 @@
 		led0 = &led0;
 		left = &button0;
                 right = &button1;
+                mtn = &button2;
 	};
 };
 

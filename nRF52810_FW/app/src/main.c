@@ -33,6 +33,34 @@
 #error "Unsupported board: led0 devicetree alias is not defined"
 #endif
 
+// #define PMW3360_DEFINE(n)						       \
+// 	static struct pmw3360_data data##n;				       \
+// 									       \
+// 	static const struct pmw3360_config config##n = {		       \
+// 		.irq_gpio = GPIO_DT_SPEC_INST_GET(n, irq_gpios),	       \
+// 		.bus = {						       \
+// 			.bus = DEVICE_DT_GET(DT_INST_BUS(n)),		       \
+// 			.config = {					       \
+// 				.frequency = DT_INST_PROP(n,		       \
+// 							  spi_max_frequency),  \
+// 				.operation = SPI_WORD_SET(8) |		       \
+// 					     SPI_TRANSFER_MSB |		       \
+// 					     SPI_MODE_CPOL | SPI_MODE_CPHA,    \
+// 				.slave = DT_INST_REG_ADDR(n),		       \
+// 			},						       \
+// 		},							       \
+// 		.cs_gpio = SPI_CS_GPIOS_DT_SPEC_GET(DT_DRV_INST(n)),	       \
+// 	};								       \
+// 									       \
+// 	DEVICE_DT_INST_DEFINE(n, pmw3360_init, NULL, &data##n, &config##n,     \
+// 			      POST_KERNEL, CONFIG_SENSOR_INIT_PRIORITY,	       \
+// 			      &pmw3360_driver_api);
+
+// DT_INST_FOREACH_STATUS_OKAY(PMW3360_DEFINE)
+
+
+
+
 
 
 /** @brief UUID of the Remote Service. **/
@@ -914,6 +942,8 @@ static int pmw3360_init(const struct device *dev)
 	struct pmw3360_data *data = dev->data;
 	const struct pmw3360_config *config = dev->config;
 	int err;
+	printk("Init invoked.");
+
 
 	data->dev = dev;
 	k_work_init(&data->trigger_handler_work, trigger_handler);
@@ -1134,31 +1164,19 @@ static const struct sensor_driver_api pmw3360_driver_api = {
 	.attr_set     = pmw3360_attr_set,
 };
 
-#define PMW3360_DEFINE(n)						       \
-	static struct pmw3360_data data##n;				       \
-									       \
-	static const struct pmw3360_config config##n = {		       \
-		.irq_gpio = GPIO_DT_SPEC_INST_GET(n, irq_gpios),	       \
-		.bus = {						       \
-			.bus = DEVICE_DT_GET(DT_INST_BUS(n)),		       \
-			.config = {					       \
-				.frequency = DT_INST_PROP(n,		       \
-							  spi_max_frequency),  \
-				.operation = SPI_WORD_SET(8) |		       \
-					     SPI_TRANSFER_MSB |		       \
-					     SPI_MODE_CPOL | SPI_MODE_CPHA,    \
-				.slave = DT_INST_REG_ADDR(n),		       \
-			},						       \
-		},							       \
-		.cs_gpio = SPI_CS_GPIOS_DT_SPEC_GET(DT_DRV_INST(n)),	       \
-	};								       \
-									       \
-	DEVICE_DT_INST_DEFINE(n, pmw3360_init, NULL, &data##n, &config##n,     \
-			      POST_KERNEL, CONFIG_SENSOR_INIT_PRIORITY,	       \
-			      &pmw3360_driver_api);
+#define SPIOP	SPI_WORD_SET(8) | SPI_TRANSFER_MSB
+static struct pmw3360_data pmw3360_data;
 
-DT_INST_FOREACH_STATUS_OKAY(PMW3360_DEFINE)
+static const struct pmw3360_config pmw3360_config = {
+    .irq_gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(button2), gpios), // Adjust manually
+	.bus =  SPI_DT_SPEC_GET(DT_NODELABEL(gendev), SPIOP, 0),
+    .cs_gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(spi0), cs_gpios), // Adjust Chip Select manually
+};
 
+DEVICE_DEFINE(pmw3360, "PMW3360", pmw3360_init, NULL,
+              &pmw3360_data, &pmw3360_config,
+              POST_KERNEL, 50,
+              &pmw3360_driver_api);
 /**************************************************************/
 
 
@@ -2046,16 +2064,13 @@ int main(void)
         return err;
     }
 
-	#define SPIOP	SPI_WORD_SET(8) | SPI_TRANSFER_MSB
-	static struct pmw3360_data data;
-    static const struct pmw3360_config config = {		       
-		.irq_gpio = 0,	       
-		.bus =  SPI_DT_SPEC_GET(DT_NODELABEL(gendev), SPIOP, 0),							       
-		.cs_gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(spi0), cs_gpios),
-	};		
-	
-	// pmw3360_init(data.dev);
-
+	// #define SPIOP	SPI_WORD_SET(8) | SPI_TRANSFER_MSB
+	// static struct pmw3360_data data;
+    // static const struct pmw3360_config config = {		       
+	// 	.irq_gpio = 0,	       
+	// 	.bus =  SPI_DT_SPEC_GET(DT_NODELABEL(gendev), SPIOP, 0),							       
+	// 	.cs_gpio = GPIO_DT_SPEC_GET(DT_NODELABEL(spi0), cs_gpios),
+	// };		
 	
 
 	while (1) {
